@@ -1,0 +1,54 @@
+.nav {
+  background-color: rgba($color: $primarycolor, $alpha: 0.90);
+  width: 320px;
+  min-height: 100vh;
+  padding: 60px 0;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 40px;
+    color: #2f083c;
+  }
+
+  ul {
+    margin-top: 60px;
+    list-style: none;
+    flex: 1;
+    li {
+      font-size: 22px;
+      line-height: 68px;
+      background-color: #ffffff15;
+      transition: 0.3s ease all;
+      cursor: pointer;
+      & + li {
+        margin-top: 5px;
+      }
+      &:hover {
+        background-color: #fff;
+        color: $primarycolor;
+      }
+    }
+  }
+  .copyright {
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      background-color: white;
+      color: $primarycolor;
+      display: block;
+      line-height: 30px;
+    }
+    .social {
+      font-size: 35px;
+      a {
+        & + a {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}

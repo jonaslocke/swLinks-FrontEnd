@@ -1,0 +1,29 @@
+.subtitle {
+  span {
+    color: $primarycolor;
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 500;
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 80%;
+      height: 2px;
+      left: 0;
+      bottom: -3px;
+      background-color: $primarycolor;
+    }
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 75%;
+      height: 2px;
+      left: 0;
+      bottom: -6px;
+      background-color: rgba($color: $primarycolor, $alpha: 0.5);
+    }
+  }
+}
