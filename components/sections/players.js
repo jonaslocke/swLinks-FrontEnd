@@ -19,7 +19,7 @@ const players = () => {
   return (
     <section>
       <SubTitle title="Jogadores da Trindade"></SubTitle>
-      <OptionsMenu options={[1,2,3]}></OptionsMenu>
+      <OptionsMenu options={['criar novo jogador','deletar jogador','travar']}></OptionsMenu>
       <div className="cards">
         {playersList.map((item, id) => (
           <PlayerCard
