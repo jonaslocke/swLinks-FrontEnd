@@ -1,6 +1,6 @@
-const links = () => {
+const Links = () => {
     return <section>links</section>;
   };
   
-  export default links;
+  export default Links;
   

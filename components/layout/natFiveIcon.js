@@ -1,4 +1,4 @@
-const natFiveIcon = ({ ratio, primaryColor, secondaryColor }) => {
+const NatFiveIcon = ({ ratio, primaryColor, secondaryColor }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,4 +19,4 @@ const natFiveIcon = ({ ratio, primaryColor, secondaryColor }) => {
   );
 };
 
-export default natFiveIcon;
+export default NatFiveIcon;

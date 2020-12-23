@@ -1,6 +1,6 @@
-const calculators = () => {
+const Calculators = () => {
     return <section>calculators</section>;
   };
   
-  export default calculators;
+  export default Calculators;
   

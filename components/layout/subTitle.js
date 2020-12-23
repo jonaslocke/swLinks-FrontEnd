@@ -1,4 +1,4 @@
-const subTitle = ({ title }) => {
+const SubTitle = ({ title }) => {
   return (
     <div className="subtitle">
       <span>{title}</span>
@@ -6,4 +6,4 @@ const subTitle = ({ title }) => {
   );
 };
 
-export default subTitle;
+export default SubTitle;

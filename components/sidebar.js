@@ -1,11 +1,18 @@
-const sidebar = ({section, setSection}) => {
+import Link from "next/link";
+
+const sidebar = () => {
+  const menuLinks = ["home", "calculators", "links"];
   return (
     <nav className="nav">
       <h1>SW LINKS</h1>
       <ul>
-        <li onClick={() => setSection(1)}>home</li>
-        <li onClick={() => setSection(2)}>calculators</li>
-        <li onClick={() => setSection(3)}>links</li>
+        {menuLinks.map((item, id) => (
+          <li key={id}>
+            <Link href={id == 0 ? "/" : item}>
+              <a>{id == 0 ? "home" : item}</a>
+            </Link>
+          </li>
+        ))}
       </ul>
       <div className="copyright">
         <span>by JonasLocke</span>

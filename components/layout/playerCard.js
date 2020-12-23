@@ -1,7 +1,7 @@
 import Image from "next/image";
 import NatFiveIcon from "../layout/natFiveIcon";
 
-const playerCard = ({ name, natFiveOwned, creationDate }) => {
+const PlayerCard = ({ name, natFiveOwned, creationDate }) => {
   const getAccountAge = () => {
     let date1 = new Date(creationDate);
     let date2 = new Date();
@@ -40,4 +40,4 @@ const playerCard = ({ name, natFiveOwned, creationDate }) => {
   );
 };
 
-export default playerCard;
+export default PlayerCard;

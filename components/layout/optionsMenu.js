@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const optionsMenu = ({ options, section, setSection }) => {
+const OptionsMenu = ({ options, section, setSection }) => {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <div className={`optionsMenu ${showMenu ? "show" : ""}`}>
@@ -17,4 +17,4 @@ const optionsMenu = ({ options, section, setSection }) => {
   );
 };
 
-export default optionsMenu;
+export default OptionsMenu;

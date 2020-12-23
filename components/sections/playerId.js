@@ -1,6 +1,6 @@
-const playerId = () => {
+const PlayerId = () => {
     return <section>playerId</section>;
   };
   
-  export default playerId;
+  export default PlayerId;
   
