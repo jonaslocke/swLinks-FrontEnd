@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const OptionsMenu = ({ options, section, setSection }) => {
+const OptionsMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <div className={`optionsMenu ${showMenu ? "show" : ""}`}>
@@ -9,9 +9,7 @@ const OptionsMenu = ({ options, section, setSection }) => {
         onClick={() => setShowMenu(!showMenu)}
       ></i>
       <ul>
-        {options.map((item, id) => (
-          <li key={id}>{item}</li>
-        ))}
+        <li>Adicionar jogador</li>
       </ul>
     </div>
   );

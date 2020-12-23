@@ -1,5 +1,5 @@
 .nav {
-  background-color: rgba($color: $primarycolor, $alpha: 0.90);
+  background-color: rgba($color: $primarycolor, $alpha: 0.9);
   min-width: 320px;
   min-height: 100vh;
   padding: 60px 0;
@@ -11,7 +11,7 @@
 
   h1 {
     font-size: 40px;
-    color: #2f083c;
+    color: invert($color: $primarycolor);
   }
 
   ul {
