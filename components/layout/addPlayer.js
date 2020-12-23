@@ -68,7 +68,7 @@ const AddPlayer = () => {
             {busy ? "carregando..." : "criar!"}
           </button>
         </form>
-        <i class="fas fa-times-circle close"></i>
+        <i className="fas fa-times-circle close"></i>
       </div>
       <div
         className="alertLabel"
