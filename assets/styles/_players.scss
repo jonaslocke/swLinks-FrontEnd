@@ -54,9 +54,90 @@
         font-weight: 500;
       }
     }
+    .close {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      font-weight: 500;
+      font-size: 12px;
+      color: $primarycolor;
+      pointer-events: none;
+      opacity: 0;
+      transition: 0.3s ease-in all;
+      &:hover {
+        font-weight: 900;
+      }
+    }
     &:hover {
       transform: translate(-1%, -1%);
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      .close {
+        opacity: 1;
+        pointer-events: initial;
+      }
     }
+    &.confirmDelete {
+      .collumn {
+        filter: grayscale(100%);
+      }
+      .dichotomy {
+        opacity: 1;
+        pointer-events: initial;
+      }
+      &.loading {
+        filter: grayscale(100%);
+        pointer-events: none;
+      }
+    }
+
+    .dichotomy {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba($color: $primarycolor, $alpha: 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease-in-out all;
+      div + div {
+        margin-top: 25px;
+      }
+      button {
+        padding: 5px 10px;
+        background-color: $primarycolor;
+        color: white;
+        font-size: 15px;
+        font-weight: 500;
+        font: inherit;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s ease-in-out all;
+        & + button {
+          margin-left: 25px;
+        }
+        &:hover {
+          transform: scale(1.1);
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+      .cancel {
+        background-color: darken(red, 20%);
+      }
+
+    }
+  }
+}
+
+@media screen and (min-width: 1367px) {
+  .playerCard {
+    width: 23% !important;
   }
 }

@@ -44,6 +44,7 @@ const players = () => {
             name={item.name}
             natFiveOwned={item.natFiveOwned}
             creationDate={item.creationDate}
+            id={item._id}
             key={id}
           ></PlayerCard>
         ))}

@@ -1,7 +1,11 @@
 import Image from "next/image";
-import NatFiveIcon from "../layout/natFiveIcon";
+import { useState } from "react";
 
-const PlayerCard = ({ name, natFiveOwned, creationDate }) => {
+const axios = require("axios");
+
+const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
+  const [busy, setBusy] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const getAccountAge = () => {
     let date1 = new Date(creationDate);
     let date2 = new Date();
@@ -11,13 +15,28 @@ const PlayerCard = ({ name, natFiveOwned, creationDate }) => {
 
     return Math.floor(Difference_In_Days);
   };
-
   const getNat5PerDay = () => {
     return (natFiveOwned / getAccountAge()).toFixed(6);
   };
+  const deletePlayer = async () => {
+    if (confirmDelete) {
+      setBusy(true);
+      const hit = await axios({
+        method: "delete",
+        url: `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/players/${id}`,
+      });
+      setBusy(false);
+    } else {
+      setConfirmDelete(true);
+    }
+  };
 
   return (
-    <div className="playerCard">
+    <div
+      className={`playerCard${confirmDelete ? " confirmDelete" : ""}${
+        busy ? " loading" : ""
+      }`}
+    >
       <div className="collumn left">
         <h3>{name}</h3>
         <Image
@@ -35,6 +54,32 @@ const PlayerCard = ({ name, natFiveOwned, creationDate }) => {
       </div>
       <div className="top-right">
         Criada em: <span>{new Date(creationDate).toLocaleDateString()}</span>
+      </div>
+      <i
+        className="fas fa-times-circle close"
+        onClick={() => deletePlayer()}
+      ></i>
+      <div className="dichotomy">
+        <div>Realmente deseja deletar esse jogador?</div>
+        <div>
+          <button
+            className="confirm"
+            onClick={() => {
+              setConfirmDelete(true);
+              deletePlayer();
+            }}
+          >
+            Sim
+          </button>
+          <button
+            className="cancel"
+            onClick={() => {
+              setConfirmDelete(false);
+            }}
+          >
+            Não
+          </button>
+        </div>
       </div>
     </div>
   );
