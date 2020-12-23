@@ -1,15 +1,14 @@
 import Link from "next/link";
 
-const sidebar = () => {
-  const menuLinks = ["home", "calculators", "links"];
+const sidebar = ({ array }) => {
   return (
     <nav className="nav">
       <h1>SW LINKS</h1>
       <ul>
-        {menuLinks.map((item, id) => (
+        {array.map((item, id) => (
           <li key={id}>
-            <Link href={id == 0 ? "/" : item}>
-              <a>{id == 0 ? "home" : item}</a>
+            <Link href={id == 0 ? "/" : `/${item}`}>
+              <a>{id == 0 ? array[0] : item}</a>
             </Link>
           </li>
         ))}

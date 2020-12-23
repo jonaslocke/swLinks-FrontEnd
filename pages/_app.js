@@ -4,7 +4,7 @@ import Sidebar from  "../components/sidebar"
 
 function MyApp({ Component, pageProps }) {
   return <>
-  <Sidebar></Sidebar>
+  <Sidebar array={["home", "calculators", "links"]}></Sidebar>
   <Component {...pageProps} />
   </>
 }
