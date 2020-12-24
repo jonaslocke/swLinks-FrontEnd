@@ -25,6 +25,7 @@
           background-color: #ffffff15;
           transition: 0.3s ease all;
           cursor: pointer;
+          display: block;
         }
         & + li {
           margin-top: 5px;
