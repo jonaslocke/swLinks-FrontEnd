@@ -19,11 +19,13 @@
       list-style: none;
       flex: 1;
       li {
-        font-size: 22px;
-        line-height: 68px;
-        background-color: #ffffff15;
-        transition: 0.3s ease all;
-        cursor: pointer;
+        a {
+          font-size: 22px;
+          line-height: 68px;
+          background-color: #ffffff15;
+          transition: 0.3s ease all;
+          cursor: pointer;
+        }
         & + li {
           margin-top: 5px;
         }
