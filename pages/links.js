@@ -1,5 +1,5 @@
-import Links from "../components/sections/links";
+const Links = () => {
+  return <section>links</section>;
+};
 
-export default function Home() {
-  return <Links></Links>;
-}
+export default Links;

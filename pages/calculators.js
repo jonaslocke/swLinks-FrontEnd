@@ -1,5 +1,5 @@
-import Calculators from "../components/sections/calculators";
+const Calculators = () => {
+  return <section>calculators</section>;
+};
 
-export default function Home() {
-  return <Calculators></Calculators>;
-}
+export default Calculators;
