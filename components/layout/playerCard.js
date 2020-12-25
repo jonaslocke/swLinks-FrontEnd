@@ -26,6 +26,7 @@ const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
         url: `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/players/${id}`,
       });
       setBusy(false);
+      setConfirmDelete(false);
     } else {
       setConfirmDelete(true);
     }
