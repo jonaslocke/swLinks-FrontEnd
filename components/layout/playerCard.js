@@ -48,7 +48,7 @@ const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
             height="64px"
             width="64px"
           />
-          <Link href={`/player/${id}`}>
+          <Link href={`/players/${id}`}>
             <i className="fas fa-edit"></i>
           </Link>
         </div>
