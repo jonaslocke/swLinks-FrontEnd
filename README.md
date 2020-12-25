@@ -20,3 +20,4 @@
         7. aiLife -> integer
         8. result -> string || list: win, tie, lose
         9. firstStrike -> string || list: player, ai
+        9. firstStrike -> string || list: player, ai
