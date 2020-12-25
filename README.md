@@ -1,18 +1,29 @@
-## SW LINKS 
+## SW LINKS
+
 ### https://sw-links-front-end.vercel.app/
 
 //TODO:
-- [ ] Change app visual, Material UI
+
+## General
+
+- [ ] Change to Material UI
 - [ ] Change folder structure
-- [ ] Players | options menu do not hide after choice
-- [ ] Players | addPlayer box better formating
 
-- [ ] Links | create objects with unique category
-- [ ] Links | create nested objects with links by category
-- [ ] Links | links links UI
-- [ ] Links | create link UI
-- [ ] Links | update link UI
+## Players
 
-- [ ] Calculators | decide what to show 
-- [ ] Calculators | build logic (backend ? frontend) 
-- [ ] Calculators | list UI
+- [ ] Options menu do not hide after choice
+- [ ] AddPlayer box better formating
+
+## Links
+
+- [ ] Create objects with unique category
+- [ ] Create nested objects with links by category
+- [ ] Links links UI
+- [ ] Create link UI
+- [ ] Update link UI
+
+## Calculators
+
+- [ ] Decide what to show
+- [ ] Build logic (backend ? frontend)
+- [ ] List UI
