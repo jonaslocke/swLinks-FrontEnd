@@ -16,8 +16,8 @@
 
 ## Links
 
-- [ ] Create objects with unique category
-- [ ] Create nested objects with links by category
+- [x] Create objects with unique category
+- [x] Create nested objects with links by category
 - [ ] Links links UI
 - [ ] Create link UI
 - [ ] Update link UI
