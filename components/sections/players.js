@@ -5,12 +5,35 @@ import SubTitle from "../layout/subTitle";
 import PlayerCard from "../layout/playerCard";
 import AddPlayer from "../layout/addPlayer";
 
+import { PlayersContext } from "../../src/PlayersContext";
+
 const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/players`;
 
 const players = () => {
   const [playersList, setPlayersList] = useState([]);
-  const [showMenu, setShowMenu] = useState(false);
-  const [opAddPlyer, setOpAddPlyer] = useState(false);
+  const [actionManagement, setActionManagement] = useState([
+    { action: "menu", startAction: false },
+    { action: "addPlayer", startAction: false },
+  ]);
+
+  const getActionStatus = (action) => {
+    const target = actionManagement.find((item) => item.action == action);
+    if (!target) return;
+    return actionManagement.find((item) => item.action == action).startAction;
+  };
+  const changeActionStatus = (action) => {
+    const target = actionManagement.find((item) => item.action == action);
+    if (!target) return;
+    actionManagement.splice(actionManagement.indexOf(target), 1);
+    setActionManagement([
+      ...actionManagement,
+      {
+        action: target.action,
+        startAction: !target.startAction,
+      },
+    ]);
+  };
+
   useEffect(() => {
     const playersList = async () => {
       const result = await axios(api);
@@ -19,37 +42,34 @@ const players = () => {
     playersList();
   }, [playersList]);
   return (
-    <section>
-      <SubTitle title="Jogadores da Trindade"></SubTitle>
-      <div className={`optionsMenu ${showMenu ? "show" : ""}`}>
-        <i
-          className="fas fa-ellipsis-h"
-          onClick={() => setShowMenu(!showMenu)}
-        ></i>
-        <ul>
-          <li
-            onClick={() => {
-              setOpAddPlyer(true);
-              setShowMenu(!showMenu);
-            }}
-          >
-            Adicionar jogador
-          </li>
-        </ul>
-      </div>
-      <div className={opAddPlyer ? 'show' : ''}><AddPlayer></AddPlayer></div>
-      <div className="cards">
-        {playersList.map((item, id) => (
-          <PlayerCard
-            name={item.name}
-            natFiveOwned={item.natFiveOwned}
-            creationDate={item.creationDate}
-            id={item._id}
-            key={id}
-          ></PlayerCard>
-        ))}
-      </div>
-    </section>
+    <PlayersContext.Provider value={{ getActionStatus, changeActionStatus }}>
+      <section>
+        <SubTitle title="Jogadores da Trindade"></SubTitle>
+        <div className={`optionsMenu${getActionStatus("menu") ? " show" : ""}`}>
+          <i
+            className="fas fa-ellipsis-h"
+            onClick={() => changeActionStatus("menu")}
+          ></i>
+          <ul>
+            <li onClick={() => changeActionStatus("addPlayer")}>
+              Adicionar jogador
+            </li>
+          </ul>
+        </div>
+        <AddPlayer></AddPlayer>
+        <div className="cards">
+          {playersList.map((item, id) => (
+            <PlayerCard
+              name={item.name}
+              natFiveOwned={item.natFiveOwned}
+              creationDate={item.creationDate}
+              id={item._id}
+              key={id}
+            ></PlayerCard>
+          ))}
+        </div>
+      </section>
+    </PlayersContext.Provider>
   );
 };
 

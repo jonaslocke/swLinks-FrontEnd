@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
-import e from "cors";
 const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/players`;
+
+import { PlayersContext } from "../../src/PlayersContext";
 
 const AddPlayer = () => {
   const [name, setName] = useState("");
@@ -9,6 +10,8 @@ const AddPlayer = () => {
   const [creationDate, setCreationDate] = useState("");
   const [alert, setAlert] = useState("");
   const [busy, setBusy] = useState(false);
+
+  const { getActionStatus, changeActionStatus } = useContext(PlayersContext);
 
   const addPlayer = async () => {
     if (!name || !natFiveOwned || !creationDate) {
@@ -32,7 +35,11 @@ const AddPlayer = () => {
   };
   return (
     <>
-      <div className={`addPlayer${!alert ? "" : " alert"}`}>
+      <div
+        className={`addPlayer${!alert ? "" : " alert"}${
+          getActionStatus("addPlayer") ? " show" : ""
+        }`}
+      >
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="inputs">
             <div>
@@ -68,7 +75,10 @@ const AddPlayer = () => {
             {busy ? "carregando..." : "criar!"}
           </button>
         </form>
-        <i className="fas fa-times-circle close"></i>
+        <i
+          className="fas fa-times-circle close"
+          onClick={() => changeActionStatus("addPlayer")}
+        ></i>
       </div>
       <div
         className="alertLabel"

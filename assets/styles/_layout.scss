@@ -175,10 +175,7 @@
       opacity: 1;
     }
   }
-}
-
-.show {
-  .addPlayer {
+  &.show {
     height: unset;
     opacity: 1;
     pointer-events: initial;
