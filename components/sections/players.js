@@ -35,11 +35,11 @@ const players = () => {
   };
 
   useEffect(() => {
-    const playersList = async () => {
+    const fetchData = async () => {
       const result = await axios(api);
       setPlayersList(result.data);
     };
-    playersList();
+    fetchData();
   }, [playersList]);
   return (
     <PlayersContext.Provider value={{ getActionStatus, changeActionStatus }}>

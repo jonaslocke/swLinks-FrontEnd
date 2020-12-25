@@ -181,3 +181,180 @@
     pointer-events: initial;
   }
 }
+
+.backButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 60px;
+  right: 60px;
+  color: $primarycolor;
+  cursor: pointer;
+  i {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  a {
+    display: block;
+    width: 0;
+    overflow: hidden;
+    transition: 0.2s ease-in-out all;
+    line-height: 30px;
+  }
+  &:hover {
+    a {
+      width: 60px;
+      text-align: right;
+    }
+  }
+}
+
+.edit-player {
+  margin-top: 60px;
+  display: flex;
+  position: relative;
+  z-index: 2;
+
+  .collumn {
+    padding: 20px;
+  }
+  .avatar {
+    --size: 110px;
+    background-color: $primarycolor;
+    width: 25%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    h1 {
+      color: white;
+    }
+    &-input-group {
+      width: var(--size);
+      height: var(--size);
+      position: relative;
+      div:nth-of-type(1) {
+        border-radius: 50%;
+      }
+      label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: var(--size);
+        height: var(--size);
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba($color: $primarycolor, $alpha: 0.8);
+        transition: 0.2s ease-in-out all;
+        opacity: 0;
+        .fa-edit {
+          font-size: 20px;
+          color: white;
+          opacity: 0.8;
+          cursor: pointer;
+        }
+      }
+      &:hover {
+        label {
+          opacity: 1;
+        }
+      }
+    }
+    .ring {
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: calc(var(--size) + 12px);
+      height: calc(var(--size) + 12px);
+      border: 2px solid white;
+      pointer-events: none;
+    }
+  }
+  .inputs {
+    flex: 1;
+    background-color: white;
+    .input-group {
+      --height: 45px;
+      display: flex;
+      label {
+        width: 25%;
+        line-height: var(--height);
+        color: $primarycolor;
+      }
+      input {
+        color: $primarycolor;
+        margin-left: 5px;
+        flex: 1;
+        line-height: var(--height);
+        padding-left: 5px;
+        font: inherit;
+        border: none;
+        border-bottom: 1px solid rgba($color: $primarycolor, $alpha: 0.5);
+        transition: 0.3s ease-out all;
+        &:focus {
+          background-color: rgba($color: $primarycolor, $alpha: 0.1);
+          outline: none;
+          border-bottom: 1px solid transparent;
+        }
+        &.error {
+          border: 1px dashed rgba($color: rgb(146, 21, 21), $alpha: 0.4);
+        }
+      }
+      & + .input-group {
+        margin-top: 20px;
+      }
+      &:last-of-type {
+        margin-bottom: 30px;
+      }
+    }
+    input[type="submit"] {
+      float: right;
+      padding: 10px 0;
+      min-width: 15ch;
+      background-color: $primarycolor;
+      color: white;
+      font-size: 15px;
+      font-weight: 500;
+      font: inherit;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s ease-in-out all;
+      & + button {
+        margin-left: 25px;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    display: none;
+  }
+  &.loading {
+    filter: grayscale(100%);
+    .loader {
+      display: block;
+    }
+  }
+  & + .updatedMessage {
+    background-color: $primarycolor;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 20px;
+    transition: 0.3s ease-in all;
+    transform: translateY(-100%);
+    &.show {
+      transform: translateY(0);
+    }
+  }
+}
