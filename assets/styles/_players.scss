@@ -23,9 +23,43 @@
           text-align: center;
           margin-bottom: 20px;
         }
-        img {
-          border-radius: 50%;
+        .avatar-card {
+          position: relative;
           border: 3px solid white !important;
+          border-radius: 50%;
+          img {
+            border-radius: 50%;
+          }
+          i {
+            --size: 64px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: var(--size);
+            height: var(--size);
+            line-height: var(--size);
+            background-color: rgba($color: $primarycolor, $alpha: 0.7);
+            border-radius: 50%;
+            display: block;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            opacity: 0;
+            &::before {
+              transition: 0.3s ease all;
+              opacity: 0.7;
+            }
+            &:hover {
+              &::before {
+                opacity: 1;
+              }
+            }
+          }
+          &:hover {
+            i {
+              opacity: 1;
+            }
+          }
         }
       }
       &.right {
@@ -131,7 +165,6 @@
       .cancel {
         background-color: darken(red, 20%);
       }
-
     }
   }
 }

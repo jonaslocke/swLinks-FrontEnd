@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 const axios = require("axios");
@@ -40,12 +41,17 @@ const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
     >
       <div className="collumn left">
         <h3>{name}</h3>
-        <Image
-          src="/portaitDefault.jpg"
-          alt="avatar"
-          height="64px"
-          width="64px"
-        />
+        <div className="avatar-card">
+          <Image
+            src="/portaitDefault.jpg"
+            alt="avatar"
+            height="64px"
+            width="64px"
+          />
+          <Link href={`/player/${id}`}>
+            <i className="fas fa-edit"></i>
+          </Link>
+        </div>
       </div>
       <div className="collumn right">
         <div className="line">{natFiveOwned} NAT 5!</div>
