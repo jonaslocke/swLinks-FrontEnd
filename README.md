@@ -18,7 +18,8 @@
 
 - [x] Create objects with unique category
 - [x] Create nested objects with links by category
-- [ ] Links links UI
+- [x] List links UI
+- [ ] List links UI | make a component of it!
 - [ ] Create link UI
 - [ ] Update link UI
 

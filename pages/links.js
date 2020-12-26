@@ -2,18 +2,38 @@ import { useState, useEffect } from "react";
 import SubTitle from "../components/layout/subTitle";
 import Loading from "../components/layout/loading";
 import axios from "axios";
-import Link from "../components/layout/link";
+import Link from "next/link";
 
 const Links = () => {
   const [links, setLinks] = useState([]);
   const [busy, setBusy] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const [categories, setCategories] = useState([]);
 
   const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/links`;
 
+  const deleteLink = (linkId) => {
+    if (confirmDelete) {
+      const fetchData = async () => {
+        setBusy(true);
+        await axios({
+          method: "DELETE",
+          url: `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/links/${linkId}`,
+        });
+        setBusy(false);
+      };
+      fetchData();
+      setConfirmDelete(false);
+    } else {
+      setConfirmDelete(true);
+    }
+  };
+
   useEffect(() => {
     const getCategories = async () => {
+      setBusy(true);
       const result = await axios(api);
+      setBusy(false);
       const uniqueCategories = [
         ...new Set(result.data.map((item) => item.category)),
       ];
@@ -34,21 +54,31 @@ const Links = () => {
       {links ? (
         <>
           <SubTitle title="Links"></SubTitle>
-          <ul className="categories">
+          <div className="categories">
             {categories.map((category, categoryId) => (
-              <div key={categoryId}>
-                {category.name}
+              <div className="listLinks" key={categoryId}>
+                <div className="title">
+                  <i className={`badge-${(categoryId % 5) + 1}`}></i>
+                  <h4>{category.name}</h4>
+                </div>
                 <ul>
                   {category.links.map((link, linkId) => (
                     <li key={linkId}>
-                      <div>{link.label}</div>
-                      <div>{link.url}</div>
+                      <Link href={link.url}>
+                        <a>{link.label}</a>
+                      </Link>
+                      <i className="fas fa-times-circle close"></i>
+                      <div className={`confirmDelete${confirmDelete ? ' show' : ''}`}>
+                        <span>Realmente deletar esse link?</span>
+                        <button>sim</button>
+                        <button>não</button>
+                      </div>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
-          </ul>
+          </div>
         </>
       ) : (
         <Loading></Loading>
