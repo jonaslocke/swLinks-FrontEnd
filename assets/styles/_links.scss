@@ -50,7 +50,7 @@
       ul {
         list-style: none;
         overflow: hidden;
-        li {
+        .link-list-item {
           border-bottom: 1px solid $primarycolor;
           background-color: white;
           padding: 10px 0;
@@ -136,6 +136,12 @@
                 margin-left: 15px;
               }
             }
+            &.show {
+              transform: translateX(0);
+            }
+          }
+          &.loading {
+            filter: grayscale(100%);
           }
         }
       }

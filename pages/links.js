@@ -3,6 +3,7 @@ import SubTitle from "../components/layout/subTitle";
 import Loading from "../components/layout/loading";
 import axios from "axios";
 import Link from "next/link";
+import LinkListItem from "../components/linkListItem";
 
 const Links = () => {
   const [links, setLinks] = useState([]);
@@ -63,17 +64,7 @@ const Links = () => {
                 </div>
                 <ul>
                   {category.links.map((link, linkId) => (
-                    <li key={linkId}>
-                      <Link href={link.url}>
-                        <a>{link.label}</a>
-                      </Link>
-                      <i className="fas fa-times-circle close"></i>
-                      <div className={`confirmDelete${confirmDelete ? ' show' : ''}`}>
-                        <span>Realmente deletar esse link?</span>
-                        <button>sim</button>
-                        <button>não</button>
-                      </div>
-                    </li>
+                    <LinkListItem data={link} key={linkId}></LinkListItem>
                   ))}
                 </ul>
               </div>
