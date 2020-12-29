@@ -8,6 +8,7 @@
 
 - [ ] Change to Material UI
 - [ ] Change folder structure
+- [ ] 
 
 ## Players
 
@@ -34,4 +35,4 @@
 - [ ] Display Structure | update
 - [ ] Players | update
 - [ ] Links | update
-- [ ] Calculators | create UI based on Material
+- [ ] Calculators | create based on Material UI
