@@ -21,10 +21,17 @@
 - [x] List links UI
 - [x] List links UI | make a component of it!
 - [x] Create link UI
-- [ ] Update link UI
+- XXX Update link UI | depreciated
+- [ ] Add Linnk category filter with pre-existing categories
 
 ## Calculators
 
 - [ ] Decide what to show
 - [ ] Build logic (backend ? frontend)
 - [ ] List UI
+
+## Material UI Refactory
+- [ ] Display Structure | update
+- [ ] Players | update
+- [ ] Links | update
+- [ ] Calculators | create UI based on Material
