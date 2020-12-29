@@ -6,7 +6,7 @@ const LinkListItem = ({ data }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [busy, setBusy] = useState(false);
 
-  const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/links/${data.linkId}`;
+  const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/links/${data._id}`;
 
   const deleteLink = () => {
     if (confirmDelete) {
@@ -28,8 +28,8 @@ const LinkListItem = ({ data }) => {
 
   return (
     <li className={`link-list-item${busy ? " loading" : ""}`}>
-      <Link href={data.url}>
-        <a>{data.label}</a>
+      <Link href={data.url} >
+        <a target="_blank">{data.label}</a> 
       </Link>
       <i
         className="fas fa-times-circle close"

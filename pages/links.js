@@ -2,33 +2,16 @@ import { useState, useEffect } from "react";
 import SubTitle from "../components/layout/subTitle";
 import Loading from "../components/layout/loading";
 import axios from "axios";
-import Link from "next/link";
 import LinkListItem from "../components/linkListItem";
+import AddLink from "../components/addLink";
 
 const Links = () => {
   const [links, setLinks] = useState([]);
   const [busy, setBusy] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [showAddLink, setShowAddLink] = useState(false);
 
   const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/links`;
-
-  const deleteLink = (linkId) => {
-    if (confirmDelete) {
-      const fetchData = async () => {
-        setBusy(true);
-        await axios({
-          method: "DELETE",
-          url: `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/links/${linkId}`,
-        });
-        setBusy(false);
-      };
-      fetchData();
-      setConfirmDelete(false);
-    } else {
-      setConfirmDelete(true);
-    }
-  };
 
   useEffect(() => {
     const getCategories = async () => {
@@ -48,13 +31,18 @@ const Links = () => {
       );
     };
     getCategories();
-  }, []);
+  }, [categories]);
 
   return (
-    <section className="links">
-      {links ? (
+    <section className={`links${showAddLink ? " show-addLink" : ""}`}>
+      {categories ? (
         <>
           <SubTitle title="Links"></SubTitle>
+          <i
+            className="fas fa-plus-square addLink-button"
+            onClick={() => setShowAddLink(!showAddLink)}
+          ></i>
+          <AddLink></AddLink>
           <div className="categories">
             {categories.map((category, categoryId) => (
               <div className="listLinks" key={categoryId}>

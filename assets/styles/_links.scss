@@ -1,8 +1,10 @@
 .links {
+  position: relative;
   .categories {
-    margin-top: 60px;
+    margin-top: -110px;
     display: flex;
     flex-wrap: wrap;
+    transition: 0.3s ease-in-out all;
     .listLinks {
       width: 42%;
       margin-right: 60px;
@@ -145,6 +147,23 @@
           }
         }
       }
+    }
+  }
+  .addLink-button {
+    --size: 60px;
+    position: absolute;
+    right: var(--size);
+    top: calc(var(--size) + 20px);
+    color: $primarycolor;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  &.show-addLink {
+    .addLink {
+      transform: translateX(0);
+    }
+    .categories {
+      margin-top: 60px;
     }
   }
 }

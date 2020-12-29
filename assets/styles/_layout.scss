@@ -182,6 +182,18 @@
   }
 }
 
+.addLink {
+  @extend .addPlayer;
+  opacity: 1;
+  height: auto;
+  pointer-events: initial;
+  transform: translateX(-150%);
+  &.loading {
+    pointer-events: none;
+    filter: grayscale(100%);
+  }
+}
+
 .backButton {
   display: flex;
   align-items: center;
