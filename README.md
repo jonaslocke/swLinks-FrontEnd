@@ -8,7 +8,8 @@
 
 - [ ] Change to Material UI
 - [ ] Change folder structure
-- [ ] Admin acess
+- [ ] Admin acess | login api created
+- [ ] dotenv Dev Enviroment
 
 ## Players
 

@@ -7,7 +7,7 @@ import AddPlayer from "../layout/addPlayer";
 
 import { PlayersContext } from "../../src/PlayersContext";
 
-const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/players`;
+const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/players`;
 
 const players = () => {
   const [playersList, setPlayersList] = useState([]);
@@ -33,16 +33,23 @@ const players = () => {
       },
     ]);
   };
+  const fetchData = async () => {
+    const result = await axios(api);
+    setPlayersList(result.data);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(api);
-      setPlayersList(result.data);
-    };
     fetchData();
-  }, [playersList]);
+    console.warn("rendered!!!");
+  }, []);
   return (
-    <PlayersContext.Provider value={{ getActionStatus, changeActionStatus }}>
+    <PlayersContext.Provider
+      value={{
+        fetchData,
+        getActionStatus,
+        changeActionStatus,
+      }}
+    >
       <section>
         <SubTitle title="Jogadores da Trindade"></SubTitle>
         <div className={`optionsMenu${getActionStatus("menu") ? " show" : ""}`}>

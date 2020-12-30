@@ -10,7 +10,7 @@ import Form from "./form";
 const pid = () => {
   const router = useRouter();
   const { pid } = router.query;
-  const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/players/${pid}`;
+  const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/players/${pid}`;
   const [playerData, setPlayerData] = useState(null);
 
   useEffect(() => {

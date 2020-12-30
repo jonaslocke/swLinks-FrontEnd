@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import axios from "axios";
-const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/players`;
+const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/players`;
 
 import { PlayersContext } from "../../src/PlayersContext";
 
@@ -11,7 +11,7 @@ const AddPlayer = () => {
   const [alert, setAlert] = useState("");
   const [busy, setBusy] = useState(false);
 
-  const { getActionStatus, changeActionStatus } = useContext(PlayersContext);
+  const { fetchData, getActionStatus, changeActionStatus } = useContext(PlayersContext);
 
   const addPlayer = async () => {
     if (!name || !natFiveOwned || !creationDate) {
@@ -31,6 +31,7 @@ const AddPlayer = () => {
       setNatFiveOwned("");
       setCreationDate("");
       setBusy(false);
+      fetchData();
     }
   };
   return (

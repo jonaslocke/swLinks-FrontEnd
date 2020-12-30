@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
-import SubTitle from "../components/layout/subTitle";
-import Loading from "../components/layout/loading";
 import axios from "axios";
+
+import Loading from "../components/layout/loading";
+import SubTitle from "../components/layout/subTitle";
+
 import LinkListItem from "../components/linkListItem";
 import AddLink from "../components/addLink";
+
+import { LinksContext } from "../src/LinksContext";
 
 const Links = () => {
   const [links, setLinks] = useState([]);
@@ -11,58 +15,66 @@ const Links = () => {
   const [categories, setCategories] = useState([]);
   const [showAddLink, setShowAddLink] = useState(false);
 
-  const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/links`;
+  const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/links`;
+
+  const getCategories = async () => {
+    setBusy(true);
+    const result = await axios(api);
+    setBusy(false);
+    const uniqueCategories = [
+      ...new Set(result.data.map((item) => item.category)),
+    ];
+    setCategories(
+      uniqueCategories.map((item) => {
+        return {
+          name: item,
+          links: [...result.data.filter((meti) => meti.category == item)],
+        };
+      })
+    );
+  };
 
   useEffect(() => {
-    const getCategories = async () => {
-      setBusy(true);
-      const result = await axios(api);
-      setBusy(false);
-      const uniqueCategories = [
-        ...new Set(result.data.map((item) => item.category)),
-      ];
-      setCategories(
-        uniqueCategories.map((item) => {
-          return {
-            name: item,
-            links: [...result.data.filter((meti) => meti.category == item)],
-          };
-        })
-      );
-    };
     getCategories();
-  }, [categories]);
+    console.warn("rendered!!!");
+  }, []);
 
   return (
-    <section className={`links${showAddLink ? " show-addLink" : ""}`}>
-      {categories ? (
-        <>
-          <SubTitle title="Links"></SubTitle>
-          <i
-            className="fas fa-plus-square addLink-button"
-            onClick={() => setShowAddLink(!showAddLink)}
-          ></i>
-          <AddLink></AddLink>
-          <div className="categories">
-            {categories.map((category, categoryId) => (
-              <div className="listLinks" key={categoryId}>
-                <div className="title">
-                  <i className={`badge-${(categoryId % 5) + 1}`}></i>
-                  <h4>{category.name}</h4>
+    <LinksContext.Provider
+      value={{
+        getCategories,
+      }}
+    >
+      <section className={`links${showAddLink ? " show-addLink" : ""}`}>
+        {categories ? (
+          <>
+            <SubTitle title="Links"></SubTitle>
+            <i
+              className="fas fa-plus-square addLink-button"
+              onClick={() => setShowAddLink(!showAddLink)}
+            ></i>
+            <AddLink></AddLink>
+            <div className="categories">
+              {categories.map((category, categoryId) => (
+                <div className="listLinks" key={categoryId}>
+                  <div className="title">
+                    <i className={`badge-${(categoryId % 5) + 1}`}></i>
+                    <h4>{category.name}</h4>
+                  </div>
+                  <ul>
+                    {category.links.map((link, linkId) => (
+                      <LinkListItem data={link} key={linkId}></LinkListItem>
+                    ))}
+                  </ul>
                 </div>
-                <ul>
-                  {category.links.map((link, linkId) => (
-                    <LinkListItem data={link} key={linkId}></LinkListItem>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </>
-      ) : (
-        <Loading></Loading>
-      )}
-    </section>
+              ))}
+            </div>
+          </>
+        ) : (
+          <Loading></Loading>
+        )}
+      </section>
+    </LinksContext.Provider>
   );
 };
 

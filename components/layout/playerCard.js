@@ -1,10 +1,13 @@
+import { useState, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+
+import { PlayersContext } from "../../src/PlayersContext";
 
 const axios = require("axios");
 
 const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
+  const { fetchData } = useContext(PlayersContext);
   const [busy, setBusy] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const getAccountAge = () => {
@@ -24,10 +27,11 @@ const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
       setBusy(true);
       const hit = await axios({
         method: "delete",
-        url: `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/players/${id}`,
+        url: `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/players/${id}`,
       });
       setBusy(false);
       setConfirmDelete(false);
+      fetchData();
     } else {
       setConfirmDelete(true);
     }

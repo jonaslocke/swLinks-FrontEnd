@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
+import { LinksContext } from "../src/LinksContext";
+
 const AddLink = () => {
   const { register, handleSubmit, errors } = useForm();
-  const api = `https://epic-payne-6bb305.netlify.app/.netlify/functions/api/links`;
+  const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/links`;
   const [busy, setBusy] = useState(false);
-  const [categories, setCategories] = useState(null);
+  const { getCategories } = useContext(LinksContext);
+  const formEl = useRef();
 
   const onSubmit = (data) => {
     const fecthData = async () => {
@@ -17,14 +20,16 @@ const AddLink = () => {
         data,
       });
       setBusy(false);
+      getCategories();
     };
     fecthData();
+    formEl.current.reset();
   };
 
   return (
     <>
       <div className={`addLink${busy ? " loading" : ""}`}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form ref={formEl} onSubmit={handleSubmit(onSubmit)}>
           <div className="inputs">
             <div>
               <label>Rótulo</label>
