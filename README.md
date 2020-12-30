@@ -8,8 +8,8 @@
 
 - [ ] Change to Material UI
 - [ ] Change folder structure
-- [ ] Admin acess | login api created
-- [ ] dotenv Dev Enviroment
+- [x] Admin acess | login api created
+- xxx dotenv Dev Enviroment | depreciated
 
 ## Players
 

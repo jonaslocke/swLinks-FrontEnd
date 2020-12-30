@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import SubTitle from "../layout/subTitle";
@@ -6,6 +6,7 @@ import PlayerCard from "../layout/playerCard";
 import AddPlayer from "../layout/addPlayer";
 
 import { PlayersContext } from "../../src/PlayersContext";
+import { UserContext } from "../../src/UserContext";
 
 const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/players`;
 
@@ -15,6 +16,8 @@ const players = () => {
     { action: "menu", startAction: false },
     { action: "addPlayer", startAction: false },
   ]);
+
+  const { logged } = useContext(UserContext);
 
   const getActionStatus = (action) => {
     const target = actionManagement.find((item) => item.action == action);
@@ -40,7 +43,6 @@ const players = () => {
 
   useEffect(() => {
     fetchData();
-    console.warn("rendered!!!");
   }, []);
   return (
     <PlayersContext.Provider
@@ -52,17 +54,21 @@ const players = () => {
     >
       <section>
         <SubTitle title="Jogadores da Trindade"></SubTitle>
-        <div className={`optionsMenu${getActionStatus("menu") ? " show" : ""}`}>
-          <i
-            className="fas fa-ellipsis-h"
-            onClick={() => changeActionStatus("menu")}
-          ></i>
-          <ul>
-            <li onClick={() => changeActionStatus("addPlayer")}>
-              Adicionar jogador
-            </li>
-          </ul>
-        </div>
+        {logged ? (
+          <div
+            className={`optionsMenu${getActionStatus("menu") ? " show" : ""}`}
+          >
+            <i
+              className="fas fa-ellipsis-h"
+              onClick={() => changeActionStatus("menu")}
+            ></i>
+            <ul>
+              <li onClick={() => changeActionStatus("addPlayer")}>
+                Adicionar jogador
+              </li>
+            </ul>
+          </div>
+        ) : null}
         <AddPlayer></AddPlayer>
         <div className="cards">
           {playersList.map((item, id) => (

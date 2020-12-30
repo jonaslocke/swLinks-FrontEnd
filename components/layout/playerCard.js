@@ -3,11 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PlayersContext } from "../../src/PlayersContext";
+import { UserContext } from "../../src/UserContext";
 
 const axios = require("axios");
 
 const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
   const { fetchData } = useContext(PlayersContext);
+  const { logged } = useContext(UserContext);
   const [busy, setBusy] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const getAccountAge = () => {
@@ -66,10 +68,12 @@ const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
       <div className="top-right">
         Criada em: <span>{new Date(creationDate).toLocaleDateString()}</span>
       </div>
-      <i
-        className="fas fa-times-circle close"
-        onClick={() => deletePlayer()}
-      ></i>
+      {logged ? (
+        <i
+          className="fas fa-times-circle close"
+          onClick={() => deletePlayer()}
+        ></i>
+      ) : null}
       <div className="dichotomy">
         <div>Realmente deseja deletar esse jogador?</div>
         <div>

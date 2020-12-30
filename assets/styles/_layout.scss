@@ -194,6 +194,119 @@
   }
 }
 
+.login {
+  position: relative;
+  .doLogin {
+    font-size: 12px;
+    text-align: right;
+    padding: 10px 0;
+    padding-right: 20px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.2s ease-in-out all;
+    position: absolute;
+    left: 0;
+    top: 0;
+    .close {
+      margin-left: 5px;
+      font-weight: 500;
+      font-size: 14px;
+      opacity: 0;
+      &:hover {
+        font-weight: 900;
+      }
+    }
+    &:hover {
+      background-color: darken($primarycolor, 10%);
+      .close {
+        opacity: 1;
+      }
+    }
+  }
+
+  form {
+    background-color: #ffffff15;
+    padding: 10px 35px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.3s ease all;
+    transform: translateX(120%);
+    position: relative;
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      color: lighten($primarycolor, 40%);
+      &:hover {
+        font-weight: 900;
+      }
+    }
+    .inputs {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        input {
+          width: 100%;
+          padding: 8px;
+          font-size: 16px;
+          font-family: inherit;
+        }
+        input[type="submit"] {
+          width: 100%;
+          background-color: transparent;
+          border: none;
+          font-size: 18px;
+          color: white;
+          cursor: pointer;
+          padding: 10px;
+          transition: 0.3s ease all;
+          &:hover {
+            background-color: darken($primarycolor, 10%);
+          }
+        }
+
+        & + div {
+          margin-top: 5px;
+        }
+      }
+      .failed-login {
+        display: none;
+        font-size: 12px;
+        padding: 10px;
+        width: 100%;
+        background-color: darken($primarycolor, 10%);
+        &.show {
+          display: block;
+        }
+      }
+    }
+
+    &.loading {
+      filter: grayscale(100%);
+    }
+  }
+  &.show {
+    form {
+      transform: translate(0);
+    }
+    .doLogin {
+      transform: translateX(-120%);
+    }
+  }
+}
+
 .backButton {
   display: flex;
   align-items: center;

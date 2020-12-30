@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Login from "./login";
 
 const sidebar = ({ array }) => {
   return (
@@ -13,7 +14,11 @@ const sidebar = ({ array }) => {
               </Link>
             </li>
           ))}
+          <li>
+            <Login></Login>
+          </li>
         </ul>
+
         <div className="copyright">
           <span>by JonasLocke</span>
           <div className="social">

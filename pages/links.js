@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import Loading from "../components/layout/loading";
@@ -8,12 +8,14 @@ import LinkListItem from "../components/linkListItem";
 import AddLink from "../components/addLink";
 
 import { LinksContext } from "../src/LinksContext";
+import { UserContext } from "../src/UserContext";
 
 const Links = () => {
   const [links, setLinks] = useState([]);
   const [busy, setBusy] = useState(false);
   const [categories, setCategories] = useState([]);
   const [showAddLink, setShowAddLink] = useState(false);
+  const { logged } = useContext(UserContext);
 
   const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/links`;
 
@@ -36,7 +38,6 @@ const Links = () => {
 
   useEffect(() => {
     getCategories();
-    console.warn("rendered!!!");
   }, []);
 
   return (
@@ -49,10 +50,12 @@ const Links = () => {
         {categories ? (
           <>
             <SubTitle title="Links"></SubTitle>
-            <i
-              className="fas fa-plus-square addLink-button"
-              onClick={() => setShowAddLink(!showAddLink)}
-            ></i>
+            {logged ? (
+              <i
+                className="fas fa-plus-square addLink-button"
+                onClick={() => setShowAddLink(!showAddLink)}
+              ></i>
+            ) : null}
             <AddLink></AddLink>
             <div className="categories">
               {categories.map((category, categoryId) => (
