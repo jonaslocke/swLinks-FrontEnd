@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import "../styles/globals.css";
 import { useState } from "react";
 import { UserContext } from "../src/UserContext";
@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
 
 const MyApp = ({ Component, pageProps }) => {
   const classes = useStyles();
+  const [logged, setLogged] = useState(false);
+
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const theme = useMemo(
     () =>
@@ -39,7 +41,11 @@ const MyApp = ({ Component, pageProps }) => {
     [prefersDarkMode]
   );
 
-  const [logged, setLogged] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("logged")) {
+      setLogged(true);
+    }
+  }, [logged]);
 
   return (
     <UserContext.Provider

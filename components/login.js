@@ -85,16 +85,16 @@ const Login = ({ show, setShow }) => {
       if (result.data.logged) {
         localStorage.setItem("logged", result.data.logged);
         localStorage.setItem("user", result.data.user);
+        setShow(false);
         setLogged(true);
-        setShow(false)
       } else {
         setTriedLogin(true);
+        setTimeout(() => {
+          setTriedLogin(false);
+        }, 4000);
       }
     };
     fecthData();
-    setTimeout(() => {
-      setTriedLogin(false);
-    }, 4000);
   };
 
   const clearForm = () => {
@@ -109,12 +109,6 @@ const Login = ({ show, setShow }) => {
     setLogged(false);
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("logged")) {
-      setUser({ logged: true, user: localStorage.getItem("user") });
-      setLogged(true);
-    }
-  }, [logged]);
   return (
     <Grid>
       <Grid align="center">

@@ -8,17 +8,21 @@ import {
   IconButton,
   Toolbar,
   Typography,
+  Box,
+  Grid,
   Menu,
   MenuItem,
 } from "@material-ui/core";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import Close from "@material-ui/icons/Close";
 
 import { UserContext } from "../../src/UserContext";
 import ResponsiveDrawer from "./drawer";
 import Modal from "./modal";
 import Login from "../login";
+import { red } from "@material-ui/core/colors";
 
 const drawerWidth = 240;
 
@@ -42,6 +46,13 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  login: {},
+  logoutButton: {
+    opacity: 0,
+    "&:hover": {
+      opacity: 1,
+    },
+  },
 }));
 
 const Navbar2 = (props) => {
@@ -57,6 +68,11 @@ const Navbar2 = (props) => {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    setLogged(false);
   };
 
   return (
@@ -76,7 +92,23 @@ const Navbar2 = (props) => {
             SW Links
           </Typography>
           {logged ? (
-            "logado"
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              className={classes.login}
+            >
+              <Typography variant="subtitle2">
+                {localStorage.getItem("user")}
+              </Typography>
+              <IconButton
+                size="small"
+                className={classes.logoutButton}
+                onClick={() => logout()}
+              >
+                <Close fontSize="small"></Close>
+              </IconButton>
+            </Box>
           ) : (
             <>
               <IconButton
