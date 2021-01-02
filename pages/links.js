@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 import Loading from "../components/layout/loading";
-import SubTitle from "../components/layout/subTitle";
 
 import LinkListItem from "../components/linkListItem";
 import AddLink from "../components/addLink";
@@ -49,7 +48,7 @@ const Links = () => {
       <section className={`links${showAddLink ? " show-addLink" : ""}`}>
         {categories ? (
           <>
-            <SubTitle title="Links"></SubTitle>
+            <div>Links</div>
             {logged ? (
               <i
                 className="fas fa-plus-square addLink-button"

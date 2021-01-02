@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
-import SubTitle from "../layout/subTitle";
 import PlayerCard from "../layout/playerCard";
 import AddPlayer from "../layout/addPlayer";
 
@@ -53,7 +52,7 @@ const players = () => {
       }}
     >
       <section>
-        <SubTitle title="Jogadores da Trindade"></SubTitle>
+        <div>Jogadores da Trindade</div>
         {logged ? (
           <div
             className={`optionsMenu${getActionStatus("menu") ? " show" : ""}`}

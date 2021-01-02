@@ -16,6 +16,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
+    "fontsource-roboto": "^4.0.0",
     "mongoose": "^5.11.8",
     "next": "10.0.3",
     "node-sass": "^5.0.0",

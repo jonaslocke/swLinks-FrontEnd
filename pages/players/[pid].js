@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-import SubTitle from "../../components/layout/subTitle";
 import BackButton from "../../components/layout/backButton";
 import Loading from "../../components/layout/loading";
 import Form from "./form";
@@ -27,7 +26,7 @@ const pid = () => {
         <Loading></Loading>
       ) : (
         <>
-          <SubTitle title={"Editar jogador"}></SubTitle>
+          <div>Editar jogador</div>
           <BackButton></BackButton>
           <Form preloadedValues={playerData} playerId={pid}></Form>
         </>
