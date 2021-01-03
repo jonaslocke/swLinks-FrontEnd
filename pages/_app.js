@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import "../styles/globals.css";
 import { useState } from "react";
 import { UserContext } from "../src/UserContext";
-import 'fontsource-roboto';
+import "fontsource-roboto";
 
 import {
   makeStyles,
@@ -56,14 +56,15 @@ const MyApp = ({ Component, pageProps }) => {
       }}
     >
       <ThemeProvider theme={theme}>
-        <div className={classes.root}>
+        {/* <div className={classes.root}>
           <CssBaseline />
           <Navbar></Navbar>
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Component {...pageProps} />
           </main>
-        </div>
+        </div> */}
+        <Component {...pageProps} />
       </ThemeProvider>
     </UserContext.Provider>
   );
