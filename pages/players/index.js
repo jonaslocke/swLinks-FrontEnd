@@ -21,6 +21,7 @@ import SportsEsportsIcon from "@material-ui/icons/SportsEsports";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import SubTitle from "../../components/subTitle";
+import AddPlayer from "./addPlayer";
 
 const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/players`;
 
@@ -87,7 +88,6 @@ export default function Players() {
   const fetchData = async () => {
     const result = await axios(api);
     setPlayersList(result.data);
-    console.log(result.data);
   };
 
   useEffect(() => {
@@ -114,6 +114,7 @@ export default function Players() {
       <SubTitle title="Jogadores">
         <SportsEsportsIcon fontSize="large" />
       </SubTitle>
+      <AddPlayer></AddPlayer>
       <Grid container spacing={4} className={classes.list}>
         {playersList.map((player, id) => {
           return (
