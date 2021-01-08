@@ -5,8 +5,6 @@ import Link from "next/link";
 import { PlayersContext } from "../../src/PlayersContext";
 import { UserContext } from "../../src/UserContext";
 
-const axios = require("axios");
-
 const PlayerCard = ({ name, natFiveOwned, creationDate, id }) => {
   const { fetchData } = useContext(PlayersContext);
   const { logged } = useContext(UserContext);

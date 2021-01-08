@@ -161,6 +161,7 @@ const Login = ({ show, setShow }) => {
         </Button>
         <Collapse in={triedLogin} className={classes.alert}>
           <Alert
+            severity="error"
             action={
               <IconButton
                 aria-label="close"
