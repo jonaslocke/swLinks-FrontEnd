@@ -3,10 +3,55 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import axios from "axios";
 import Loading from "../../components/layout/loading";
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(4),
+  },
+  input: {
+    "& label.Mui-focused": {
+      color: "#cb7be6",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "#cb7be6",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "#cb7be6",
+      },
+    },
+  },
+  submit: {
+    backgroundColor: "#762f8d",
+    color: "white",
+    marginTop: 12,
+    "&:hover": {
+      backgroundColor: "#cb7be6",
+      color: "#762f8d",
+    },
+  },
+  progress: {
+    color: "white",
+  },
+}));
+
+import EditIcon from "@material-ui/icons/Edit";
 
 const Form = ({ preloadedValues, playerId }) => {
+  const classes = useStyles();
   const { register, handleSubmit, errors } = useForm({
-    defaultValues: preloadedValues,
+    defaultValues: {
+      ...preloadedValues,
+      creationDate: new Date(preloadedValues.creationDate).toLocaleDateString(),
+    },
   });
   const api = `https://elegant-shannon-f859b4.netlify.app/.netlify/functions/api/players/${playerId}`;
   const [busy, setBusy] = useState(false);
@@ -24,6 +69,7 @@ const Form = ({ preloadedValues, playerId }) => {
       setUpdated(true);
     };
     fecthData();
+    console.log(data);
   };
 
   return (
@@ -33,62 +79,76 @@ const Form = ({ preloadedValues, playerId }) => {
           className={`edit-player${busy ? " loading" : ""}`}
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="collumn avatar">
-            <h1>{preloadedValues.name}</h1>
-            <div className="avatar-input-group">
-              <Image
-                src="/portaitDefault.jpg"
-                alt="avatar"
-                height="110px"
-                width="110px"
-              />
-              <label htmlFor="avatar">
-                <i className="fas fa-edit"></i>
-              </label>
-              <input type="hidden" name="avatar" id="avatar" />
-              <div className="ring"></div>
-            </div>
-          </div>
-          <div className="collumn inputs">
-            <div className="input-group">
-              <label htmlFor="name">nome</label>
-              <input
-                className={errors.name ? "error" : ""}
-                name="name"
-                id="name"
-                ref={register({ required: true })}
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="natFiveOwned"># NAT5!</label>
-              <input
-                className={errors.natFiveOwned ? "error" : ""}
-                name="natFiveOwned"
-                id="natFiveOwned"
-                ref={register({ required: true })}
-              />
-            </div>
-            <div className="input-group">
-              <label htmlFor="creationDate">data de criação</label>
-              <input
-                className={errors.creationDate ? "error" : ""}
-                name="creationDate"
-                id="creationDate"
-                ref={register({ required: true })}
-              />
-            </div>
-            <input
-              type="submit"
-              disabled={busy}
-              value={busy ? "Carregando..." : "Atualizar"}
-            />
-          </div>
-          <Loading></Loading>
+          <Paper elevation={6} className={classes.paper}>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item>
+                <EditIcon fontSize="small" />
+              </Grid>
+              <Grid item>
+                <Typography variant="overline">Editar</Typography>
+              </Grid>
+            </Grid>
+            <Grid container spacing={2}>
+              <Grid item>
+                <TextField
+                  label="Nome"
+                  variant="outlined"
+                  name="name"
+                  id="name"
+                  inputRef={register({ required: true })}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  className={classes.input}
+                />
+              </Grid>
+              <Grid item>
+                {" "}
+                <TextField
+                  label="# NAT5"
+                  variant="outlined"
+                  name="natFiveOwned"
+                  id="natFiveOwned"
+                  inputRef={register({ required: true })}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  className={classes.input}
+                />
+              </Grid>
+              <Grid item>
+                {" "}
+                <TextField
+                  label="Data criação"
+                  variant="outlined"
+                  name="creationDate"
+                  id="creationDate"
+                  inputRef={register({ required: true })}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  className={classes.input}
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  className={classes.submit}
+                  size="large"
+                  disabled={busy}
+                >
+                  {busy ? (
+                    <CircularProgress size={26} className={classes.progress} />
+                  ) : (
+                    "atualizar!"
+                  )}
+                </Button>
+              </Grid>
+            </Grid>
+          </Paper>
         </form>
       ) : null}
-      <div className={`updatedMessage${updated ? " show" : ""}`}>
-        Atualizado com sucesso!
-      </div>
     </>
   );
 };

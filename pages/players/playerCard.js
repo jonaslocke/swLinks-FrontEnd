@@ -132,9 +132,7 @@ const PlayerCard = ({ data }) => {
             </>
           }
           title={data.name}
-          subheader={`Começou ${new Date(
-            data.creationDate
-          ).toLocaleDateString()}`}
+          subheader={`Começou ${data.creationDate}`}
         />
 
         <CardContent>
